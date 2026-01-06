@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion, useScroll, useTransform, useSpring } from 'motion/react';
 import { Palette, Presentation, Code, Brain, Instagram, Rocket, Sparkles, Star, Zap, Target } from 'lucide-react';
 import { SkillCard } from './components/SkillCard';
 import { MagneticButton } from './components/MagneticButton';
@@ -8,6 +8,13 @@ import { MacWindow } from './components/MacWindow';
 import { MacMenuBar } from './components/MacMenuBar';
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const smoothProgress = useSpring(scrollYProgress, { 
+    stiffness: 100, 
+    damping: 30, 
+    restDelta: 0.001 
+  });
+  
   const skills = [
     {
       icon: Palette,
@@ -41,6 +48,12 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 overflow-hidden" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif' }}>
+      {/* Smooth scroll progress indicator */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 z-50 origin-left"
+        style={{ scaleX: smoothProgress }}
+      />
+      
       {/* macOS Menu Bar */}
       <MacMenuBar />
       
@@ -61,11 +74,11 @@ export default function App() {
             initial={{ scale: 0, rotate: -180 }}
             animate={{ scale: 1, rotate: 0 }}
             transition={{ 
-              duration: 1, 
+              duration: 1.2, 
               delay: 0.2, 
               type: 'spring',
-              stiffness: 200,
-              damping: 20
+              stiffness: 120,
+              damping: 15
             }}
             className="inline-block mb-8"
           >
@@ -73,18 +86,32 @@ export default function App() {
               {/* Rotating border with blue-green tints */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                className="absolute -inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 via-blue-600 via-emerald-600 to-cyan-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity"
+                transition={{ 
+                  duration: 20, 
+                  repeat: Infinity, 
+                  ease: 'linear' 
+                }}
+                className="absolute -inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 via-blue-600 via-emerald-600 to-cyan-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"
               />
               
               {/* Pulsing effect */}
               <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
                 className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-md opacity-50"
               />
               
-              <div className="relative w-40 h-40 bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl overflow-hidden">
+              <motion.div 
+                className="relative w-40 h-40 bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl overflow-hidden"
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+              >
                 <motion.img
                   src="/your-photo.jpg"
                   alt="Shivangi"
@@ -92,20 +119,27 @@ export default function App() {
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
                   animate={{ 
-                    rotate: [0, 5, -5, 0],
-                    scale: [1, 1.05, 1],
+                    rotate: [0, 2, -2, 0],
                   }}
-                  transition={{ duration: 3, repeat: Infinity }}
+                  transition={{ 
+                    duration: 6, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                 />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
           {/* Main heading with animated gradient text */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ 
+              duration: 1, 
+              delay: 0.4,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
           >
             <h1 className="mb-6 text-6xl md:text-8xl text-white">
               <span className="inline-block mr-2">Hi, I'm{'   '}</span>
@@ -167,23 +201,41 @@ export default function App() {
             ].map((item, index) => (
               <motion.div
                 key={item.text}
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{ 
-                  duration: 0.5, 
+                  duration: 0.6, 
                   delay: 1.2 + index * 0.1,
                   type: 'spring',
-                  stiffness: 200
+                  stiffness: 150,
+                  damping: 12
                 }}
                 whileHover={{ 
-                  scale: 1.15,
-                  rotate: [0, -5, 5, -5, 0],
-                  transition: { duration: 0.4 }
+                  scale: 1.1,
+                  y: -5,
+                  transition: { 
+                    duration: 0.2,
+                    ease: "easeOut"
+                  }
                 }}
-                className={`px-5 py-3 rounded-2xl bg-gradient-to-br ${item.gradient} text-white flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-2xl transition-shadow`}
+                whileTap={{ 
+                  scale: 0.95,
+                  transition: { duration: 0.1 }
+                }}
+                className={`px-5 py-3 rounded-2xl bg-gradient-to-br ${item.gradient} text-white flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300`}
               >
-                <item.icon size={20} />
-                <span>{item.text}</span>
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: index * 0.2
+                  }}
+                >
+                  <item.icon size={20} />
+                </motion.div>
+                <span className="font-medium">{item.text}</span>
               </motion.div>
             ))}
           </motion.div>
@@ -192,19 +244,37 @@ export default function App() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1.6 }}
+            transition={{ duration: 1, delay: 1.8 }}
             className="mt-20"
           >
             <motion.div
-              animate={{ y: [0, 15, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="text-gray-500"
+              animate={{ y: [0, 10, 0] }}
+              transition={{ 
+                duration: 2.5, 
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="text-gray-400"
             >
-              <div className="flex flex-col items-center gap-2">
-                <span className="text-sm">Scroll to explore</span>
-                <motion.div
-                  animate={{ opacity: [0.3, 1, 0.3] }}
+              <div className="flex flex-col items-center gap-3">
+                <motion.span 
+                  className="text-sm font-medium"
+                  animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{ duration: 2, repeat: Infinity }}
+                >
+                  Scroll to explore
+                </motion.span>
+                <motion.div
+                  animate={{ 
+                    opacity: [0.3, 1, 0.3],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="text-xl"
                 >
                   ↓
                 </motion.div>
@@ -275,7 +345,7 @@ export default function App() {
       </section>
 
       {/* Philosophy Section with bold design */}
-      <section id="approach" className="relative py-32 px-6 bg-black">
+      <section id="approach" className="relative py-32 px-6 bg-black overflow-hidden">
         {/* Animated gradient line */}
         <motion.div
           animate={{
@@ -285,7 +355,16 @@ export default function App() {
           className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-500 via-blue-500 to-cyan-500 bg-[length:200%_auto]"
         />
 
-        <div className="max-w-5xl mx-auto">
+        {/* Parallax background elements */}
+        <motion.div
+          style={{ y: useTransform(smoothProgress, [0, 1], [0, -100]) }}
+          className="absolute inset-0 opacity-10"
+        >
+          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full blur-3xl" />
+        </motion.div>
+
+        <div className="max-w-5xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -331,16 +410,25 @@ export default function App() {
             ].map((item, index) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                whileHover={{ 
-                  y: -10,
-                  scale: 1.02,
-                  transition: { duration: 0.3 }
+                initial={{ opacity: 0, y: 60, rotateX: 45 }}
+                whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.2,
+                  ease: [0.25, 0.46, 0.45, 0.94]
                 }}
-                className={`relative p-8 rounded-3xl bg-gradient-to-br ${item.gradient} border-2 ${item.borderColor} backdrop-blur-sm cursor-pointer group overflow-hidden`}
+                whileHover={{ 
+                  y: -15,
+                  scale: 1.03,
+                  rotateX: -5,
+                  transition: { 
+                    duration: 0.3,
+                    ease: "easeOut"
+                  }
+                }}
+                className={`relative p-8 rounded-3xl bg-gradient-to-br ${item.gradient} border-2 ${item.borderColor} backdrop-blur-sm cursor-pointer group overflow-hidden transform-gpu`}
+                style={{ transformStyle: "preserve-3d" }}
               >
                 {/* Hover glow effect */}
                 <motion.div

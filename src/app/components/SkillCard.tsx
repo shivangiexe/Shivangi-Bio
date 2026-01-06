@@ -1,6 +1,6 @@
-import { motion } from 'motion/react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { LucideIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 interface SkillCardProps {
   icon: LucideIcon;
@@ -13,41 +13,89 @@ interface SkillCardProps {
 
 export function SkillCard({ icon: Icon, title, description, level, color, delay }: SkillCardProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const rotateX = useSpring(useTransform(mouseY, [-300, 300], [10, -10]), {
+    stiffness: 300,
+    damping: 30
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-10, 10]), {
+    stiffness: 300,
+    damping: 30
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    
+    const rect = cardRef.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    
+    mouseX.set(e.clientX - centerX);
+    mouseY.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -12, scale: 1.03 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className="relative p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-white/40 transition-all cursor-pointer group overflow-hidden"
+      ref={cardRef}
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ 
+        duration: 0.8, 
+        delay,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
       style={{
-        boxShadow: isHovered ? `0 20px 60px ${color}40` : '0 0 0 transparent',
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d"
+      }}
+      whileHover={{ 
+        y: -15, 
+        scale: 1.02,
+        transition: { 
+          duration: 0.3,
+          ease: "easeOut"
+        }
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      className="relative p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-white/40 transition-all duration-500 cursor-pointer group overflow-hidden"
+      style={{
+        boxShadow: isHovered ? `0 25px 80px ${color}30, 0 0 0 1px ${color}20` : '0 10px 40px rgba(0,0,0,0.1)',
       }}
     >
       {/* Animated gradient background */}
       <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         animate={isHovered ? {
           background: [
-            `linear-gradient(135deg, ${color}10, ${color}05)`,
-            `linear-gradient(225deg, ${color}15, ${color}08)`,
-            `linear-gradient(135deg, ${color}10, ${color}05)`,
+            `linear-gradient(135deg, ${color}08, ${color}03)`,
+            `linear-gradient(225deg, ${color}12, ${color}06)`,
+            `linear-gradient(135deg, ${color}08, ${color}03)`,
           ],
         } : {}}
-        transition={{ duration: 3, repeat: Infinity }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
       />
       
-      {/* Sparkle effects on hover */}
+      {/* Enhanced sparkle effects */}
       {isHovered && (
         <>
-          {[...Array(5)].map((_, i) => (
+          {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-2 h-2 rounded-full"
+              className="absolute w-1 h-1 rounded-full"
               style={{ backgroundColor: color }}
               initial={{ 
                 x: Math.random() * 100 + '%',
@@ -58,11 +106,13 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
               animate={{
                 scale: [0, 1, 0],
                 opacity: [0, 1, 0],
+                rotate: [0, 180, 360],
               }}
               transition={{
-                duration: 1.5,
+                duration: 2,
                 repeat: Infinity,
                 delay: i * 0.2,
+                ease: "easeInOut"
               }}
             />
           ))}
