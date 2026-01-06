@@ -30,6 +30,9 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
     
+    // Disable 3D effects on mobile for better performance
+    if (window.innerWidth < 768) return;
+    
     const rect = cardRef.current.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
@@ -49,7 +52,7 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
       ref={cardRef}
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true, margin: "-50px" }}
       transition={{ 
         duration: 0.8, 
         delay,
@@ -61,19 +64,23 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
         transformStyle: "preserve-3d"
       }}
       whileHover={{ 
-        y: -15, 
+        y: -8, 
         scale: 1.02,
         transition: { 
           duration: 0.3,
           ease: "easeOut"
         }
       }}
+      whileTap={{ 
+        scale: 0.98,
+        transition: { duration: 0.1 }
+      }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={handleMouseLeave}
-      className="relative p-8 rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-white/40 transition-all duration-500 cursor-pointer group overflow-hidden"
+      className="relative p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-white/10 backdrop-blur-2xl border border-white/20 hover:border-white/40 transition-all duration-500 cursor-pointer group overflow-hidden touch-manipulation"
       style={{
-        boxShadow: isHovered ? `0 25px 80px ${color}30, 0 0 0 1px ${color}20` : '0 10px 40px rgba(0,0,0,0.1)',
+        boxShadow: isHovered ? `0 20px 60px ${color}20, 0 0 0 1px ${color}15` : '0 8px 32px rgba(0,0,0,0.1)',
       }}
     >
       {/* Animated gradient background */}
@@ -122,14 +129,14 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
       <div className="relative z-10">
         <motion.div
           animate={isHovered ? { 
-            rotate: [0, -15, 15, -15, 0],
-            scale: [1, 1.1, 1],
+            rotate: [0, -10, 10, -10, 0],
+            scale: [1, 1.05, 1],
           } : {}}
           transition={{ duration: 0.6 }}
           className="inline-block"
         >
           <div 
-            className="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 relative overflow-hidden backdrop-blur-xl"
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 relative overflow-hidden backdrop-blur-xl"
             style={{ backgroundColor: `${color}25` }}
           >
             <motion.div
@@ -143,20 +150,21 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
               } : {}}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            <Icon style={{ color }} size={32} strokeWidth={2.5} className="relative z-10" />
+            <Icon style={{ color }} size={24} strokeWidth={2.5} className="relative z-10 sm:w-7 sm:h-7 md:w-8 md:h-8" />
           </div>
         </motion.div>
         
-        <h3 className="mb-3 text-white">{title}</h3>
-        <p className="text-gray-300 mb-4 leading-relaxed">{description}</p>
+        <h3 className="mb-2 sm:mb-3 text-white text-lg sm:text-xl font-semibold">{title}</h3>
+        <p className="text-gray-300 mb-3 sm:mb-4 leading-relaxed text-sm sm:text-base">{description}</p>
         
         <motion.div 
-          className="inline-block px-4 py-2 rounded-full font-medium backdrop-blur-xl"
+          className="inline-block px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-medium backdrop-blur-xl text-sm sm:text-base"
           style={{ 
             backgroundColor: `${color}20`,
             color 
           }}
           whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           {level}
         </motion.div>

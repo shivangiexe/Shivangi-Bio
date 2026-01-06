@@ -80,7 +80,7 @@ export default function App() {
               stiffness: 120,
               damping: 15
             }}
-            className="inline-block mb-8"
+            className="inline-block mb-6 md:mb-8"
           >
             <div className="relative group cursor-pointer">
               {/* Rotating border with blue-green tints */}
@@ -91,7 +91,7 @@ export default function App() {
                   repeat: Infinity, 
                   ease: 'linear' 
                 }}
-                className="absolute -inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 via-blue-600 via-emerald-600 to-cyan-600 rounded-full blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 via-blue-600 via-emerald-600 to-cyan-600 rounded-full blur-lg md:blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"
               />
               
               {/* Pulsing effect */}
@@ -102,14 +102,18 @@ export default function App() {
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -inset-2 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-md opacity-50"
+                className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-sm md:blur-md opacity-50"
               />
               
               <motion.div 
-                className="relative w-40 h-40 bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl overflow-hidden"
+                className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl overflow-hidden"
                 whileHover={{ 
                   scale: 1.05,
                   transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                whileTap={{ 
+                  scale: 0.95,
+                  transition: { duration: 0.1 }
                 }}
               >
                 <motion.img
@@ -141,7 +145,7 @@ export default function App() {
               ease: [0.25, 0.46, 0.45, 0.94]
             }}
           >
-            <h1 className="mb-6 text-6xl md:text-8xl text-white">
+            <h1 className="mb-4 md:mb-6 text-4xl sm:text-5xl md:text-6xl lg:text-8xl text-white leading-tight">
               <span className="inline-block mr-2">Hi, I'm{'   '}</span>
               <motion.span
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -165,7 +169,7 @@ export default function App() {
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 0.8, delay: 1.2 }}
-                  className="absolute -bottom-2 left-0 right-0 h-2 bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-400 rounded-full shadow-lg shadow-cyan-500/50"
+                  className="absolute -bottom-1 md:-bottom-2 left-0 right-0 h-1 md:h-2 bg-gradient-to-r from-cyan-400 via-teal-400 to-blue-400 rounded-full shadow-lg shadow-cyan-500/50"
                   style={{ transformOrigin: 'left' }}
                 />
               </motion.span>
@@ -175,7 +179,7 @@ export default function App() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-white mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0"
             >
               A student intentionally building skills across{' '}
               <span className="text-cyan-300 font-semibold">design</span>,{' '}
@@ -191,7 +195,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
-            className="flex flex-wrap items-center justify-center gap-4 mb-12"
+            className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:gap-4 mb-8 md:mb-12 px-4"
           >
             {[
               { icon: Star, text: 'Student', gradient: 'from-cyan-500 to-cyan-700' },
@@ -211,8 +215,8 @@ export default function App() {
                   damping: 12
                 }}
                 whileHover={{ 
-                  scale: 1.1,
-                  y: -5,
+                  scale: 1.05,
+                  y: -2,
                   transition: { 
                     duration: 0.2,
                     ease: "easeOut"
@@ -222,7 +226,7 @@ export default function App() {
                   scale: 0.95,
                   transition: { duration: 0.1 }
                 }}
-                className={`px-5 py-3 rounded-2xl bg-gradient-to-br ${item.gradient} text-white flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300`}
+                className={`px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-br ${item.gradient} text-white flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 text-sm sm:text-base`}
               >
                 <motion.div
                   animate={{ rotate: [0, 10, -10, 0] }}
@@ -233,7 +237,7 @@ export default function App() {
                     delay: index * 0.2
                   }}
                 >
-                  <item.icon size={20} />
+                  <item.icon size={16} className="sm:w-5 sm:h-5" />
                 </motion.div>
                 <span className="font-medium">{item.text}</span>
               </motion.div>
@@ -285,7 +289,7 @@ export default function App() {
       </section>
 
       {/* Skills Section with vibrant background */}
-      <section id="skills" className="relative py-32 px-6 bg-gradient-to-br from-gray-900 via-teal-900/20 to-gray-900">
+      <section id="skills" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-gradient-to-br from-gray-900 via-teal-900/20 to-gray-900">
         {/* Decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div
@@ -293,14 +297,14 @@ export default function App() {
               rotate: 360,
             }}
             transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-            className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl"
+            className="absolute top-0 left-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-cyan-500/10 rounded-full blur-3xl"
           />
           <motion.div
             animate={{
               rotate: -360,
             }}
             transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-            className="absolute bottom-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl"
+            className="absolute bottom-0 right-0 w-48 h-48 sm:w-64 sm:h-64 md:w-96 md:h-96 bg-teal-500/10 rounded-full blur-3xl"
           />
         </div>
 
@@ -310,29 +314,29 @@ export default function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center mb-6 sm:mb-8"
           >
             <motion.div
               initial={{ scale: 0 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, type: 'spring' }}
-              className="inline-block mb-4"
+              className="inline-block mb-3 sm:mb-4"
             >
-              <div className="px-6 py-2 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 border border-cyan-500/30 rounded-full text-cyan-300 backdrop-blur-sm">
+              <div className="px-4 sm:px-6 py-2 bg-gradient-to-r from-cyan-500/20 to-teal-500/20 border border-cyan-500/30 rounded-full text-cyan-300 backdrop-blur-sm text-sm sm:text-base">
                 What I Do?
               </div>
             </motion.div>
             
-            <h2 className="mb-6 text-5xl md:text-6xl bg-gradient-to-r from-white via-cyan-200 to-teal-200 bg-clip-text text-transparent">
+            <h2 className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-white via-cyan-200 to-teal-200 bg-clip-text text-transparent leading-tight">
               Skills & Tools
             </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-4">
               Building strong foundations with discipline and intent
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {skills.map((skill, index) => (
               <SkillCard
                 key={skill.title}
@@ -345,7 +349,7 @@ export default function App() {
       </section>
 
       {/* Philosophy Section with bold design */}
-      <section id="approach" className="relative py-32 px-6 bg-black overflow-hidden">
+      <section id="approach" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-black overflow-hidden">
         {/* Animated gradient line */}
         <motion.div
           animate={{
@@ -357,11 +361,11 @@ export default function App() {
 
         {/* Parallax background elements */}
         <motion.div
-          style={{ y: useTransform(smoothProgress, [0, 1], [0, -100]) }}
+          style={{ y: useTransform(smoothProgress, [0, 1], [0, -50]) }}
           className="absolute inset-0 opacity-10"
         >
-          <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-10 w-40 h-40 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full blur-3xl" />
+          <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full blur-2xl sm:blur-3xl" />
+          <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full blur-2xl sm:blur-3xl" />
         </motion.div>
 
         <div className="max-w-5xl mx-auto relative z-10">
@@ -370,9 +374,9 @@ export default function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-20"
+            className="text-center mb-12 sm:mb-16 md:mb-20"
           >
-            <h2 className="mb-6 text-5xl md:text-6xl text-white">
+            <h2 className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
               My Approach ✨
             </h2>
             <motion.div
@@ -380,11 +384,11 @@ export default function App() {
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 1 }}
-              className="w-32 h-2 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 mx-auto rounded-full"
+              className="w-20 sm:w-32 h-1 sm:h-2 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 mx-auto rounded-full"
             />
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
             {[
               {
                 title: 'No Hype, Just Growth',
@@ -427,7 +431,7 @@ export default function App() {
                     ease: "easeOut"
                   }
                 }}
-                className={`relative p-8 rounded-3xl bg-gradient-to-br ${item.gradient} border-2 ${item.borderColor} backdrop-blur-sm cursor-pointer group overflow-hidden transform-gpu`}
+                className={`relative p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${item.gradient} border-2 ${item.borderColor} backdrop-blur-sm cursor-pointer group overflow-hidden transform-gpu touch-manipulation`}
                 style={{ transformStyle: "preserve-3d" }}
               >
                 {/* Hover glow effect */}
@@ -445,17 +449,21 @@ export default function App() {
                 
                 <div className="relative z-10">
                   <motion.div 
-                    className="text-6xl mb-6"
+                    className="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6"
                     whileHover={{ 
                       rotate: [0, -10, 10, -10, 0],
-                      scale: [1, 1.2, 1]
+                      scale: [1, 1.1, 1]
+                    }}
+                    whileTap={{ 
+                      rotate: [0, -5, 5, -5, 0],
+                      scale: [1, 1.05, 1]
                     }}
                     transition={{ duration: 0.5 }}
                   >
                     {item.icon}
                   </motion.div>
-                  <h3 className="mb-4 text-white text-2xl">{item.title}</h3>
-                  <p className="text-gray-300 leading-relaxed">{item.description}</p>
+                  <h3 className="mb-3 sm:mb-4 text-white text-xl sm:text-2xl font-semibold">{item.title}</h3>
+                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{item.description}</p>
                 </div>
               </motion.div>
             ))}
@@ -485,12 +493,12 @@ export default function App() {
       </section>
 
       {/* Footer/Contact with vibrant design */}
-      <section id="connect" className="relative py-24 px-6 bg-gradient-to-br from-cyan-900 via-teal-900 to-blue-900">
+      <section id="connect" className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-gradient-to-br from-cyan-900 via-teal-900 to-blue-900">
         {/* Animated background pattern */}
         <motion.div
           animate={{ opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 4, repeat: Infinity }}
-          className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:32px_32px]"
+          className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] sm:bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:32px_32px]"
         />
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -501,7 +509,7 @@ export default function App() {
             transition={{ duration: 0.6 }}
           >
             <motion.h2 
-              className="mb-6 text-5xl md:text-6xl text-white"
+              className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white"
               animate={{ 
                 textShadow: [
                   '0 0 20px rgba(6, 182, 212, 0.5)',
@@ -513,40 +521,40 @@ export default function App() {
             >
               Let's Connect! 🤝
             </motion.h2>
-            <p className="text-xl text-cyan-200 mb-12 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-cyan-200 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
               Always open to learning opportunities and meaningful connections.
             </p>
 
             <MagneticButton href="https://instagram.com/shiivv.exe">
               <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className="relative inline-block group"
               >
                 {/* Super glow effect */}
                 <motion.div
                   animate={{
-                    scale: [1, 1.2, 1],
+                    scale: [1, 1.1, 1],
                     opacity: [0.5, 0.8, 0.5],
                   }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute -inset-4 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-2xl opacity-75"
+                  className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-xl sm:blur-2xl opacity-75"
                 />
                 
-                <div className="relative px-10 py-5 bg-white rounded-full flex items-center gap-4 shadow-2xl">
+                <div className="relative px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-white rounded-full flex items-center gap-2 sm:gap-3 md:gap-4 shadow-2xl touch-manipulation">
                   <motion.div
                     animate={{ rotate: [0, 360] }}
                     transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
                   >
-                    <Instagram size={28} className="text-teal-600" />
+                    <Instagram size={20} className="text-teal-600 sm:w-6 sm:h-6 md:w-7 md:h-7" />
                   </motion.div>
-                  <span className="text-2xl font-bold bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 bg-clip-text text-transparent">
+                  <span className="text-lg sm:text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 bg-clip-text text-transparent">
                     @shiivv.exe
                   </span>
                   <motion.span
-                    animate={{ x: [0, 8, 0] }}
+                    animate={{ x: [0, 6, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
-                    className="text-2xl"
+                    className="text-lg sm:text-xl md:text-2xl"
                   >
                     →
                   </motion.span>
@@ -559,9 +567,9 @@ export default function App() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-16 pt-8 border-t border-white/20"
+              className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-white/20"
             >
-              <p className="text-cyan-200">
+              <p className="text-cyan-200 text-sm sm:text-base px-4">
                 © 2025 Shivangi — Student | Career-Focused Learner | Building with Intention 
               </p>
             </motion.div>

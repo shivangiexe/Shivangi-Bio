@@ -43,6 +43,9 @@ export function MagneticButton({ children, className = '', href }: MagneticButto
     const handleGlobalMouseMove = (e: MouseEvent) => {
       if (!ref.current || isHovered) return;
       
+      // Disable magnetic effects on mobile
+      if (window.innerWidth < 768) return;
+      
       const rect = ref.current.getBoundingClientRect();
       const distance = Math.sqrt(
         Math.pow(e.clientX - (rect.left + rect.width / 2), 2) +
