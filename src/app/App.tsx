@@ -6,6 +6,8 @@ import { AnimatedBackground } from './components/AnimatedBackground';
 import { CursorGlow } from './components/CursorGlow';
 import { MacWindow } from './components/MacWindow';
 import { MacMenuBar } from './components/MacMenuBar';
+import { ScrollToTop } from './components/ScrollToTop';
+import { SmoothNav } from './components/SmoothNav';
 
 export default function App() {
   const { scrollYProgress } = useScroll();
@@ -52,21 +54,32 @@ export default function App() {
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 z-50 origin-left"
         style={{ scaleX: smoothProgress }}
+        role="progressbar"
+        aria-label="Page scroll progress"
       />
       
       {/* macOS Menu Bar */}
       <MacMenuBar />
       
+      {/* Smooth Navigation Dots */}
+      <SmoothNav />
+      
+      {/* Scroll to Top Button */}
+      <ScrollToTop />
+      
       {/* Cursor glow effect */}
       <CursorGlow />
 
+      {/* Main content */}
+      <main id="main-content">
+
       {/* Hero Section */}
-      <section id="about" className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 pt-20">
+      <section id="about" className="relative min-h-screen flex items-center justify-center overflow-hidden px-6 pt-20" aria-label="About Shivangi">
         {/* Animated background */}
         <AnimatedBackground />
 
         {/* Grid pattern overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" aria-hidden="true" />
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           {/* Animated logo */}
@@ -289,9 +302,9 @@ export default function App() {
       </section>
 
       {/* Skills Section with vibrant background */}
-      <section id="skills" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-gradient-to-br from-gray-900 via-teal-900/20 to-gray-900">
+      <section id="skills" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-gradient-to-br from-gray-900 via-teal-900/20 to-gray-900" aria-label="Skills and Tools">
         {/* Decorative elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
           <motion.div
             animate={{
               rotate: 360,
@@ -349,7 +362,7 @@ export default function App() {
       </section>
 
       {/* Philosophy Section with bold design */}
-      <section id="approach" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-black overflow-hidden">
+      <section id="approach" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-black overflow-hidden" aria-label="My Approach and Philosophy">
         {/* Animated gradient line */}
         <motion.div
           animate={{
@@ -486,12 +499,13 @@ export default function App() {
       </section>
 
       {/* Footer/Contact with vibrant design */}
-      <section id="connect" className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-gradient-to-br from-cyan-900 via-teal-900 to-blue-900">
+      <section id="connect" className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 bg-gradient-to-br from-cyan-900 via-teal-900 to-blue-900" aria-label="Connect with Shivangi">
         {/* Animated background pattern */}
         <motion.div
           animate={{ opacity: [0.1, 0.2, 0.1] }}
           transition={{ duration: 4, repeat: Infinity }}
           className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] sm:bg-[linear-gradient(to_right,#ffffff12_1px,transparent_1px),linear-gradient(to_bottom,#ffffff12_1px,transparent_1px)] bg-[size:24px_24px] sm:bg-[size:32px_32px]"
+          aria-hidden="true"
         />
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
@@ -569,6 +583,7 @@ export default function App() {
           </motion.div>
         </div>
       </section>
+      </main>
     </div>
   );
 }
