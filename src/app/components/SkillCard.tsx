@@ -83,42 +83,35 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
         boxShadow: isHovered ? `0 20px 60px ${color}20, 0 0 0 1px ${color}15` : '0 8px 32px rgba(0,0,0,0.1)',
       }}
     >
-      {/* Animated gradient background */}
+      {/* Simplified gradient background */}
       <motion.div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        animate={isHovered ? {
-          background: [
-            `linear-gradient(135deg, ${color}08, ${color}03)`,
-            `linear-gradient(225deg, ${color}12, ${color}06)`,
-            `linear-gradient(135deg, ${color}08, ${color}03)`,
-          ],
-        } : {}}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{
+          background: isHovered ? `linear-gradient(135deg, ${color}08, ${color}04)` : 'transparent'
+        }}
       />
       
-      {/* Enhanced sparkle effects */}
+      {/* Reduced sparkle effects - only 3 instead of 8 */}
       {isHovered && (
         <>
-          {[...Array(8)].map((_, i) => (
+          {[...Array(3)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 rounded-full"
+              className="absolute w-1 h-1 rounded-full opacity-60"
               style={{ backgroundColor: color }}
               initial={{ 
                 x: Math.random() * 100 + '%',
                 y: Math.random() * 100 + '%',
                 scale: 0,
-                opacity: 0,
               }}
               animate={{
                 scale: [0, 1, 0],
-                opacity: [0, 1, 0],
-                rotate: [0, 180, 360],
+                opacity: [0, 0.6, 0],
               }}
               transition={{
-                duration: 2,
+                duration: 1.5,
                 repeat: Infinity,
-                delay: i * 0.2,
+                delay: i * 0.4,
                 ease: "easeInOut"
               }}
             />
@@ -129,26 +122,20 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
       <div className="relative z-10">
         <motion.div
           animate={isHovered ? { 
-            rotate: [0, -10, 10, -10, 0],
-            scale: [1, 1.05, 1],
+            rotate: [0, -5, 5, 0],
+            scale: [1, 1.02, 1],
           } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
           className="inline-block"
         >
           <div 
-            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 relative overflow-hidden backdrop-blur-xl"
-            style={{ backgroundColor: `${color}25` }}
+            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-3 sm:mb-4 relative overflow-hidden backdrop-blur-sm"
+            style={{ backgroundColor: `${color}20` }}
           >
-            <motion.div
-              className="absolute inset-0"
-              animate={isHovered ? {
-                background: [
-                  `linear-gradient(45deg, ${color}40, ${color}20)`,
-                  `linear-gradient(225deg, ${color}40, ${color}20)`,
-                  `linear-gradient(45deg, ${color}40, ${color}20)`,
-                ],
-              } : {}}
-              transition={{ duration: 2, repeat: Infinity }}
+            {/* Simplified icon background */}
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ background: `linear-gradient(45deg, ${color}30, ${color}15)` }}
             />
             <Icon style={{ color }} size={24} strokeWidth={2.5} className="relative z-10 sm:w-7 sm:h-7 md:w-8 md:h-8" />
           </div>

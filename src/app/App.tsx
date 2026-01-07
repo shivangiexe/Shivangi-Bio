@@ -83,26 +83,26 @@ export default function App() {
             className="inline-block mb-6 md:mb-8"
           >
             <div className="relative group cursor-pointer">
-              {/* Rotating border with blue-green tints */}
+              {/* Rotating border - simplified */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ 
-                  duration: 20, 
+                  duration: 30, 
                   repeat: Infinity, 
                   ease: 'linear' 
                 }}
-                className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 via-blue-600 via-emerald-600 to-cyan-600 rounded-full blur-lg md:blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 rounded-full blur-lg opacity-60 group-hover:opacity-80 transition-opacity duration-300"
               />
               
-              {/* Pulsing effect */}
+              {/* Simplified pulsing effect */}
               <motion.div
-                animate={{ scale: [1, 1.05, 1] }}
+                animate={{ scale: [1, 1.02, 1] }}
                 transition={{ 
-                  duration: 4, 
+                  duration: 6, 
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
-                className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-sm md:blur-md opacity-50"
+                className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full blur-sm opacity-40"
               />
               
               <motion.div 
@@ -123,10 +123,10 @@ export default function App() {
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
                   animate={{ 
-                    rotate: [0, 2, -2, 0],
+                    rotate: [0, 1, -1, 0],
                   }}
                   transition={{ 
-                    duration: 6, 
+                    duration: 8, 
                     repeat: Infinity,
                     ease: "easeInOut"
                   }}
@@ -229,12 +229,12 @@ export default function App() {
                 className={`px-3 sm:px-4 md:px-5 py-2 sm:py-2.5 md:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-br ${item.gradient} text-white flex items-center gap-1.5 sm:gap-2 cursor-pointer shadow-lg hover:shadow-2xl transition-all duration-300 text-sm sm:text-base`}
               >
                 <motion.div
-                  animate={{ rotate: [0, 10, -10, 0] }}
+                  animate={{ rotate: [0, 5, -5, 0] }}
                   transition={{ 
-                    duration: 2, 
+                    duration: 3, 
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: index * 0.2
+                    delay: index * 0.3
                   }}
                 >
                   <item.icon size={16} className="sm:w-5 sm:h-5" />
@@ -359,13 +359,13 @@ export default function App() {
           className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-teal-500 via-blue-500 to-cyan-500 bg-[length:200%_auto]"
         />
 
-        {/* Parallax background elements */}
+        {/* Simplified parallax background elements */}
         <motion.div
-          style={{ y: useTransform(smoothProgress, [0, 1], [0, -50]) }}
-          className="absolute inset-0 opacity-10"
+          style={{ y: useTransform(smoothProgress, [0, 1], [0, -30]) }}
+          className="absolute inset-0 opacity-5"
         >
-          <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full blur-2xl sm:blur-3xl" />
-          <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full blur-2xl sm:blur-3xl" />
+          <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-full blur-2xl" />
+          <div className="absolute bottom-10 sm:bottom-20 right-5 sm:right-10 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full blur-2xl" />
         </motion.div>
 
         <div className="max-w-5xl mx-auto relative z-10">
@@ -434,31 +434,24 @@ export default function App() {
                 className={`relative p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${item.gradient} border-2 ${item.borderColor} backdrop-blur-sm cursor-pointer group overflow-hidden transform-gpu touch-manipulation`}
                 style={{ transformStyle: "preserve-3d" }}
               >
-                {/* Hover glow effect */}
+                {/* Simplified hover glow effect */}
                 <motion.div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  animate={{
-                    background: [
-                      `radial-gradient(circle at 50% 50%, ${item.gradient.split(' ')[0].replace('from-', '')}40, transparent)`,
-                      `radial-gradient(circle at 80% 80%, ${item.gradient.split(' ')[1].replace('to-', '')}40, transparent)`,
-                      `radial-gradient(circle at 50% 50%, ${item.gradient.split(' ')[0].replace('from-', '')}40, transparent)`,
-                    ],
+                  style={{
+                    background: `radial-gradient(circle at 50% 50%, ${item.gradient.split(' ')[0].replace('from-', '')}20, transparent)`
                   }}
-                  transition={{ duration: 3, repeat: Infinity }}
                 />
                 
                 <div className="relative z-10">
                   <motion.div 
                     className="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6"
                     whileHover={{ 
-                      rotate: [0, -10, 10, -10, 0],
-                      scale: [1, 1.1, 1]
-                    }}
-                    whileTap={{ 
-                      rotate: [0, -5, 5, -5, 0],
                       scale: [1, 1.05, 1]
                     }}
-                    transition={{ duration: 0.5 }}
+                    whileTap={{ 
+                      scale: [1, 1.02, 1]
+                    }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                   >
                     {item.icon}
                   </motion.div>
@@ -512,12 +505,12 @@ export default function App() {
               className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white"
               animate={{ 
                 textShadow: [
-                  '0 0 20px rgba(6, 182, 212, 0.5)',
-                  '0 0 40px rgba(20, 184, 166, 0.5)',
-                  '0 0 20px rgba(6, 182, 212, 0.5)',
+                  '0 0 20px rgba(6, 182, 212, 0.3)',
+                  '0 0 30px rgba(20, 184, 166, 0.4)',
+                  '0 0 20px rgba(6, 182, 212, 0.3)',
                 ]
               }}
-              transition={{ duration: 3, repeat: Infinity }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
               Let's Connect! 🤝
             </motion.h2>
@@ -531,14 +524,14 @@ export default function App() {
                 whileTap={{ scale: 0.95 }}
                 className="relative inline-block group"
               >
-                {/* Super glow effect */}
+                {/* Simplified glow effect */}
                 <motion.div
                   animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.5, 0.8, 0.5],
+                    scale: [1, 1.05, 1],
+                    opacity: [0.4, 0.6, 0.4],
                   }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-xl sm:blur-2xl opacity-75"
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -inset-2 sm:-inset-4 bg-gradient-to-r from-cyan-500 via-teal-500 to-blue-500 rounded-full blur-xl opacity-60"
                 />
                 
                 <div className="relative px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-5 bg-white rounded-full flex items-center gap-2 sm:gap-3 md:gap-4 shadow-2xl touch-manipulation">
