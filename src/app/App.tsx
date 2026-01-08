@@ -429,6 +429,8 @@ export default function App() {
                 organization: 'Elitos',
                 instagram: '@elitos.official',
                 instagramUrl: 'https://instagram.com/elitos.official',
+                website: 'elitos.ragspro.com',
+                websiteUrl: 'https://elitos.ragspro.com',
                 description: 'Working with family business — gaining hands-on experience in operations, strategy, and real-world business skills',
                 type: 'Business',
                 gradient: 'from-amber-500/20 to-orange-900/20',
