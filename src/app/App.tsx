@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform, useSpring } from 'motion/react';
-import { Palette, Presentation, Code, Brain, Instagram, Rocket, Sparkles, Star, Zap, Target } from 'lucide-react';
+import { Palette, Presentation, Code, Brain, Instagram, Rocket, Sparkles, Star, Zap, Target, Briefcase, GraduationCap, Building2, Globe } from 'lucide-react';
 import { SkillCard } from './components/SkillCard';
 import { MagneticButton } from './components/MagneticButton';
 import { AnimatedBackground } from './components/AnimatedBackground';
@@ -356,6 +356,187 @@ export default function App() {
                 {...skill}
                 delay={index * 0.15}
               />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Experience Section */}
+      <section id="experience" className="relative py-16 sm:py-24 md:py-32 px-4 sm:px-6 bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900" aria-label="Experience and Work">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <motion.div
+            animate={{ rotate: -360 }}
+            transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+            className="absolute top-20 right-10 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-blue-500/10 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{ rotate: 360 }}
+            transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
+            className="absolute bottom-20 left-10 w-48 h-48 sm:w-64 sm:h-64 md:w-80 md:h-80 bg-purple-500/10 rounded-full blur-3xl"
+          />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-8 sm:mb-12"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, type: 'spring' }}
+              className="inline-block mb-3 sm:mb-4"
+            >
+              <div className="px-4 sm:px-6 py-2 bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 rounded-full text-blue-300 backdrop-blur-sm text-sm sm:text-base">
+                Where I Work?
+              </div>
+            </motion.div>
+            
+            <h2 className="mb-4 sm:mb-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl bg-gradient-to-r from-white via-blue-200 to-purple-200 bg-clip-text text-transparent leading-tight">
+              Experience & Roles
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+              Building real-world experience through meaningful work
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+            {[
+              {
+                icon: Building2,
+                emoji: '💼',
+                title: 'Working Professional',
+                organization: 'Elitos',
+                instagram: '@elitos.official',
+                instagramUrl: 'https://instagram.com/elitos.official',
+                description: 'Working with family business — gaining hands-on experience in operations, strategy, and real-world business skills',
+                type: 'Business',
+                gradient: 'from-amber-500/20 to-orange-900/20',
+                borderColor: 'border-amber-500/30',
+                iconColor: 'text-amber-400',
+              },
+              {
+                icon: Briefcase,
+                emoji: '🚀',
+                title: 'Marketing Officer',
+                organization: 'RagsPro Agency',
+                instagram: '@rags.ai',
+                instagramUrl: 'https://instagram.com/rags.ai',
+                website: 'ragspro.com',
+                websiteUrl: 'https://ragspro.com',
+                description: 'Driving marketing strategies and growth initiatives at a cutting-edge AI agency',
+                type: 'Marketing',
+                gradient: 'from-cyan-500/20 to-blue-900/20',
+                borderColor: 'border-cyan-500/30',
+                iconColor: 'text-cyan-400',
+              },
+              {
+                icon: GraduationCap,
+                emoji: '📊',
+                title: 'Data Analytics + Gen AI',
+                organization: 'Ducat',
+                instagram: '@ducatsouthextension',
+                instagramUrl: 'https://instagram.com/ducatsouthextension',
+                description: 'Professional training in data analytics and generative AI — building future-ready skills',
+                type: 'Education',
+                gradient: 'from-violet-500/20 to-purple-900/20',
+                borderColor: 'border-violet-500/30',
+                iconColor: 'text-violet-400',
+              },
+              {
+                icon: Palette,
+                emoji: '🎨',
+                title: 'Designer Head',
+                organization: 'Novelle MUN',
+                instagram: '@the_novelle_mun',
+                instagramUrl: 'https://instagram.com/the_novelle_mun',
+                description: 'Leading the design team, creating visual identities, and crafting impactful event materials',
+                type: 'Leadership',
+                gradient: 'from-pink-500/20 to-rose-900/20',
+                borderColor: 'border-pink-500/30',
+                iconColor: 'text-pink-400',
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 60, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                whileHover={{ 
+                  y: -10,
+                  scale: 1.02,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
+                className={`relative p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-br ${item.gradient} border-2 ${item.borderColor} backdrop-blur-sm cursor-pointer group overflow-hidden transform-gpu touch-manipulation`}
+              >
+                {/* Hover glow */}
+                <motion.div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: `radial-gradient(circle at 50% 50%, ${item.gradient.split(' ')[0].replace('from-', '')}30, transparent)`
+                  }}
+                />
+                
+                <div className="relative z-10">
+                  {/* Type badge */}
+                  <div className={`inline-block px-3 py-1 rounded-full text-xs font-medium mb-4 ${item.borderColor} border bg-white/5`}>
+                    {item.type}
+                  </div>
+                  
+                  {/* Icon */}
+                  <motion.div 
+                    className="text-4xl sm:text-5xl mb-4"
+                    whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {item.emoji}
+                  </motion.div>
+                  
+                  {/* Title & Organization */}
+                  <h3 className="text-white text-xl sm:text-2xl font-bold mb-1">{item.title}</h3>
+                  <p className={`${item.iconColor} font-semibold text-base sm:text-lg mb-2`}>{item.organization}</p>
+                  
+                  {/* Instagram handle */}
+                  <div className="flex flex-wrap items-center gap-3 mb-3">
+                    <a 
+                      href={item.instagramUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+                    >
+                      <Instagram size={14} />
+                      <span>{item.instagram}</span>
+                    </a>
+                    {item.website && (
+                      <a 
+                        href={item.websiteUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white transition-colors"
+                      >
+                        <Globe size={14} />
+                        <span>{item.website}</span>
+                      </a>
+                    )}
+                  </div>
+                  
+                  {/* Description */}
+                  <p className="text-gray-300 leading-relaxed text-sm sm:text-base">{item.description}</p>
+                </div>
+                
+                {/* Decorative corner */}
+                <div className={`absolute top-0 right-0 w-20 h-20 ${item.gradient.replace('from-', 'bg-').split(' ')[0]} opacity-20 rounded-bl-full`} />
+              </motion.div>
             ))}
           </div>
         </div>

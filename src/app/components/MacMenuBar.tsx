@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 
 export function MacMenuBar() {
-  const menuItems = ['About', 'Skills', 'Approach', 'Connect'];
+  const menuItems = ['About', 'Skills', 'Experience', 'Approach', 'Connect'];
   
   return (
     <motion.div
