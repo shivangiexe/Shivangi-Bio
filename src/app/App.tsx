@@ -12,10 +12,25 @@ import { SmoothNav } from './components/SmoothNav';
 export default function App() {
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, { 
-    stiffness: 100, 
-    damping: 30, 
-    restDelta: 0.001 
+    stiffness: 50, 
+    damping: 20, 
+    restDelta: 0.0001 
   });
+  
+  // Ultra-smooth spring config for animations
+  const smoothSpring = {
+    type: "spring",
+    stiffness: 80,
+    damping: 20,
+    mass: 0.8
+  };
+  
+  const gentleSpring = {
+    type: "spring",
+    stiffness: 60,
+    damping: 15,
+    mass: 1
+  };
   
   const skills = [
     {

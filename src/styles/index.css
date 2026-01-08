@@ -2,14 +2,21 @@
 @import './tailwind.css';
 @import './theme.css';
 
-/* Performance-first approach */
+/* Ultra-smooth scrolling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
+/* Buttery smooth text rendering */
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth everything by default */
+*, *::before, *::after {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Keyboard focus styles for accessibility */
@@ -57,7 +64,26 @@ a:focus-visible {
 
 /* Smooth but lightweight transitions */
 button, a, [role="button"] {
-  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth hover states for all interactive elements */
+.group:hover, 
+button:hover, 
+a:hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth image loading */
+img {
+  transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smooth section transitions */
+section {
+  transition: opacity 0.6s ease-out;
 }
 
 /* Performance optimizations */

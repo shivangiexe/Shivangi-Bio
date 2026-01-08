@@ -39,8 +39,14 @@ export function SmoothNav() {
 
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ 
+        type: "spring",
+        stiffness: 100,
+        damping: 20,
+        delay: 0.5
+      }}
       className="fixed top-20 right-6 z-40 hidden lg:block"
     >
       <div className="flex flex-col gap-3 bg-white/10 backdrop-blur-md rounded-full p-3 border border-white/20">
@@ -48,13 +54,14 @@ export function SmoothNav() {
           <motion.button
             key={item.id}
             onClick={() => scrollToSection(item.id)}
-            className={`relative w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`relative w-3 h-3 rounded-full transition-all duration-500 ${
               activeSection === item.id
                 ? 'bg-cyan-400 scale-125'
                 : 'bg-white/40 hover:bg-white/60'
             }`}
-            whileHover={{ scale: 1.3 }}
-            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.5 }}
+            whileTap={{ scale: 0.8 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
             aria-label={`Navigate to ${item.label}`}
           >
             {/* Tooltip */}

@@ -18,13 +18,15 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   
-  const rotateX = useSpring(useTransform(mouseY, [-300, 300], [10, -10]), {
-    stiffness: 300,
-    damping: 30
+  const rotateX = useSpring(useTransform(mouseY, [-300, 300], [8, -8]), {
+    stiffness: 150,
+    damping: 20,
+    mass: 0.5
   });
-  const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-10, 10]), {
-    stiffness: 300,
-    damping: 30
+  const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-8, 8]), {
+    stiffness: 150,
+    damping: 20,
+    mass: 0.5
   });
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -54,9 +56,9 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ 
-        duration: 0.8, 
+        duration: 1, 
         delay,
-        ease: [0.25, 0.46, 0.45, 0.94]
+        ease: [0.22, 1, 0.36, 1]
       }}
       style={{
         rotateX,
@@ -64,16 +66,17 @@ export function SkillCard({ icon: Icon, title, description, level, color, delay 
         transformStyle: "preserve-3d"
       }}
       whileHover={{ 
-        y: -8, 
+        y: -10, 
         scale: 1.02,
         transition: { 
-          duration: 0.3,
-          ease: "easeOut"
+          type: "spring",
+          stiffness: 200,
+          damping: 20
         }
       }}
       whileTap={{ 
         scale: 0.98,
-        transition: { duration: 0.1 }
+        transition: { type: "spring", stiffness: 400, damping: 25 }
       }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
