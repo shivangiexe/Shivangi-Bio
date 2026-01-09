@@ -99,39 +99,31 @@ export default function App() {
         <div className="relative z-10 max-w-5xl mx-auto text-center">
           {/* Animated logo */}
           <motion.div
-            initial={{ scale: 0, rotate: -180 }}
-            animate={{ scale: 1, rotate: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ 
-              duration: 1.2, 
+              duration: 0.8, 
               delay: 0.2, 
               type: 'spring',
-              stiffness: 120,
+              stiffness: 100,
               damping: 15
             }}
             className="inline-block mb-6 md:mb-8"
           >
             <div className="relative group cursor-pointer">
-              {/* Rotating border - simplified */}
+              {/* Rotating border - only on desktop */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ 
-                  duration: 30, 
+                  duration: 40, 
                   repeat: Infinity, 
                   ease: 'linear' 
                 }}
-                className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 rounded-full blur-lg opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+                className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-cyan-600 via-teal-600 to-blue-600 rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity duration-300 hidden sm:block"
               />
               
-              {/* Simplified pulsing effect */}
-              <motion.div
-                animate={{ scale: [1, 1.02, 1] }}
-                transition={{ 
-                  duration: 6, 
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-                className="absolute -inset-1 md:-inset-2 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full blur-sm opacity-40"
-              />
+              {/* Static glow on mobile */}
+              <div className="absolute -inset-2 bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full blur-md opacity-40 sm:hidden" />
               
               <motion.div 
                 className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-40 md:h-40 bg-gradient-to-br from-cyan-600 via-teal-600 to-blue-600 rounded-full flex items-center justify-center shadow-2xl overflow-hidden"
